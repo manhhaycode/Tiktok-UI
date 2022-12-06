@@ -1,8 +1,35 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
+import Tippy from '@tippyjs/react/headless';
+import { useEffect, useRef, useState } from 'react';
+
 const cx = classNames.bind(styles);
 function Header() {
+    const [searchValue, setSearchValue] = useState('');
+    const [visible, setVisible] = useState(false);
+    const [loadAnimation, setLoadAnimation] = useState(false);
+    const [searchResult, setSearchResult] = useState('');
+    const myInterVal = useRef();
+
+    useEffect(() => {
+        clearInterval(myInterVal.current);
+        if (searchValue) {
+            setLoadAnimation(false);
+            myInterVal.current = setInterval(() => {
+                setLoadAnimation(true);
+                fetch(`https://jsonplaceholder.typicode.com/todos`)
+                    .then((res) => res.json())
+                    .then((posts) => {
+                        setSearchResult(posts[0].title);
+                        setLoadAnimation(false);
+                        clearInterval(myInterVal.current);
+                    })
+                    .catch((e) => console.log(e.message));
+            }, 800);
+        }
+    }, [searchValue]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -75,33 +102,61 @@ function Header() {
                 </a>
                 <div className={cx('search-bar__container')}>
                     <form className={cx('search-bar__form')}>
-                        <input
-                            className={cx('search-bar__input')}
-                            typeof="search"
-                            placeholder="Search accounts and videos"
-                        />
+                        <Tippy
+                            render={(attrs) => (
+                                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                                    My tippy box
+                                </div>
+                            )}
+                            visible={visible && searchResult.length > 0}
+                            onClickOutside={(e) => {
+                                setVisible(false);
+                            }}
+                        >
+                            <input
+                                className={cx('search-bar__input')}
+                                onChange={(e) => {
+                                    setSearchValue(e.target.value);
+                                    if (e.target.value === '') {
+                                        setVisible(false);
+                                    }
+                                }}
+                                onFocus={(e) => {
+                                    setVisible(true);
+                                }}
+                                value={searchValue}
+                                typeof="search"
+                                placeholder="Search accounts and videos"
+                            />
+                        </Tippy>
                         <svg
                             className={cx('search-bar__remove')}
+                            onClick={() => {
+                                setSearchValue('');
+                            }}
                             width="16"
                             data-e2e=""
                             height="16"
                             viewBox="0 0 48 48"
-                            fill="rgba(22, 24, 35, .34)"
+                            fill={!loadAnimation && searchValue.length !== 0 ? 'rgba(22, 24, 35, .34)' : 'transparent'}
                             xmlns="http://www.w3.org/2000/svg"
                             style={{ margin: '0 12' }}
                         >
                             <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
                                 d="M24 46C36.1503 46 46 36.1503 46 24C46 11.8497 36.1503 2 24 2C11.8497 2 2 11.8497 2 24C2 36.1503 11.8497 46 24 46ZM15.1466 30.7323L21.8788 24.0001L15.1466 17.2679C14.756 16.8774 14.756 16.2442 15.1466 15.8537L15.8537 15.1466C16.2442 14.756 16.8774 14.756 17.2679 15.1466L24.0001 21.8788L30.7323 15.1466C31.1229 14.756 31.756 14.756 32.1466 15.1466L32.8537 15.8537C33.2442 16.2442 33.2442 16.8774 32.8537 17.2679L26.1214 24.0001L32.8537 30.7323C33.2442 31.1229 33.2442 31.756 32.8537 32.1466L32.1466 32.8537C31.756 33.2442 31.1229 33.2442 30.7323 32.8537L24.0001 26.1214L17.2679 32.8537C16.8774 33.2442 16.2442 33.2442 15.8537 32.8537L15.1466 32.1466C14.756 31.756 14.756 31.1229 15.1466 30.7323Z"
                             ></path>
                         </svg>
-                        <div className={cx('lds-ring')}>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        {loadAnimation && (
+                            <div className={cx('lds-ring')}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        )}
+
                         <span className={cx('search-bar__spacing')}></span>
                         <button className={cx('search-bar__icon')} typeof="submit">
                             <svg
