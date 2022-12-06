@@ -14,6 +14,7 @@ function Header() {
 
     useEffect(() => {
         clearInterval(myInterVal.current);
+        setVisible(false);
         if (searchValue) {
             setLoadAnimation(false);
             myInterVal.current = setInterval(() => {
@@ -22,6 +23,7 @@ function Header() {
                     .then((res) => res.json())
                     .then((posts) => {
                         setSearchResult(posts[0].title);
+                        setVisible(true);
                         setLoadAnimation(false);
                         clearInterval(myInterVal.current);
                     })
@@ -116,6 +118,7 @@ function Header() {
                             <input
                                 className={cx('search-bar__input')}
                                 onChange={(e) => {
+                                    console.log(searchResult);
                                     setSearchValue(e.target.value);
                                     if (e.target.value === '') {
                                         setVisible(false);
@@ -133,6 +136,7 @@ function Header() {
                             className={cx('search-bar__remove')}
                             onClick={() => {
                                 setSearchValue('');
+                                setSearchResult('');
                             }}
                             width="16"
                             data-e2e=""
