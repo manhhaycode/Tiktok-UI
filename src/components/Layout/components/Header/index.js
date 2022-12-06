@@ -14,11 +14,11 @@ function Header() {
 
     useEffect(() => {
         clearInterval(myInterVal.current);
-        setVisible(false);
         if (searchValue) {
             setLoadAnimation(false);
             myInterVal.current = setInterval(() => {
                 setLoadAnimation(true);
+                setVisible(false);
                 fetch(`https://jsonplaceholder.typicode.com/todos`)
                     .then((res) => res.json())
                     .then((posts) => {
@@ -29,6 +29,8 @@ function Header() {
                     })
                     .catch((e) => console.log(e.message));
             }, 800);
+        } else {
+            setVisible(false);
         }
     }, [searchValue]);
 
@@ -118,11 +120,7 @@ function Header() {
                             <input
                                 className={cx('search-bar__input')}
                                 onChange={(e) => {
-                                    console.log(searchResult);
                                     setSearchValue(e.target.value);
-                                    if (e.target.value === '') {
-                                        setVisible(false);
-                                    }
                                 }}
                                 onFocus={(e) => {
                                     setVisible(true);
