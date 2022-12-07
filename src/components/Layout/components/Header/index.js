@@ -1,39 +1,11 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
-import Tippy from '@tippyjs/react/headless';
-import { useEffect, useRef, useState } from 'react';
+import Search from '../Search';
+import Actions from '../Actions';
 
 const cx = classNames.bind(styles);
 function Header() {
-    const [searchValue, setSearchValue] = useState('');
-    const [visible, setVisible] = useState(false);
-    const [loadAnimation, setLoadAnimation] = useState(false);
-    const [searchResult, setSearchResult] = useState('');
-    const myInterVal = useRef();
-
-    useEffect(() => {
-        clearInterval(myInterVal.current);
-        if (searchValue) {
-            setLoadAnimation(false);
-            myInterVal.current = setInterval(() => {
-                setLoadAnimation(true);
-                setVisible(false);
-                fetch(`https://jsonplaceholder.typicode.com/todos`)
-                    .then((res) => res.json())
-                    .then((posts) => {
-                        setSearchResult(posts[0].title);
-                        setVisible(true);
-                        setLoadAnimation(false);
-                        clearInterval(myInterVal.current);
-                    })
-                    .catch((e) => console.log(e.message));
-            }, 800);
-        } else {
-            setVisible(false);
-        }
-    }, [searchValue]);
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -104,117 +76,8 @@ function Header() {
                         </g>
                     </svg>
                 </a>
-                <div className={cx('search-bar__container')}>
-                    <form className={cx('search-bar__form')}>
-                        <Tippy
-                            render={(attrs) => (
-                                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                                    My tippy box
-                                </div>
-                            )}
-                            visible={visible && searchResult.length > 0}
-                            onClickOutside={(e) => {
-                                setVisible(false);
-                            }}
-                        >
-                            <input
-                                className={cx('search-bar__input')}
-                                onChange={(e) => {
-                                    setSearchValue(e.target.value);
-                                }}
-                                onFocus={(e) => {
-                                    setVisible(true);
-                                }}
-                                value={searchValue}
-                                typeof="search"
-                                placeholder="Search accounts and videos"
-                            />
-                        </Tippy>
-                        <svg
-                            className={cx('search-bar__remove')}
-                            onClick={() => {
-                                setSearchValue('');
-                                setSearchResult('');
-                            }}
-                            width="16"
-                            data-e2e=""
-                            height="16"
-                            viewBox="0 0 48 48"
-                            fill={!loadAnimation && searchValue.length !== 0 ? 'rgba(22, 24, 35, .34)' : 'transparent'}
-                            xmlns="http://www.w3.org/2000/svg"
-                            style={{ margin: '0 12' }}
-                        >
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M24 46C36.1503 46 46 36.1503 46 24C46 11.8497 36.1503 2 24 2C11.8497 2 2 11.8497 2 24C2 36.1503 11.8497 46 24 46ZM15.1466 30.7323L21.8788 24.0001L15.1466 17.2679C14.756 16.8774 14.756 16.2442 15.1466 15.8537L15.8537 15.1466C16.2442 14.756 16.8774 14.756 17.2679 15.1466L24.0001 21.8788L30.7323 15.1466C31.1229 14.756 31.756 14.756 32.1466 15.1466L32.8537 15.8537C33.2442 16.2442 33.2442 16.8774 32.8537 17.2679L26.1214 24.0001L32.8537 30.7323C33.2442 31.1229 33.2442 31.756 32.8537 32.1466L32.1466 32.8537C31.756 33.2442 31.1229 33.2442 30.7323 32.8537L24.0001 26.1214L17.2679 32.8537C16.8774 33.2442 16.2442 33.2442 15.8537 32.8537L15.1466 32.1466C14.756 31.756 14.756 31.1229 15.1466 30.7323Z"
-                            ></path>
-                        </svg>
-                        {loadAnimation && (
-                            <div className={cx('lds-ring')}>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        )}
-
-                        <span className={cx('search-bar__spacing')}></span>
-                        <button className={cx('search-bar__icon')} typeof="submit">
-                            <svg
-                                width="24"
-                                data-e2e=""
-                                height="24"
-                                viewBox="0 0 48 48"
-                                fill="rgba(22, 24, 35, .34)"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M22 10C15.3726 10 10 15.3726 10 22C10 28.6274 15.3726 34 22 34C28.6274 34 34 28.6274 34 22C34 15.3726 28.6274 10 22 10ZM6 22C6 13.1634 13.1634 6 22 6C30.8366 6 38 13.1634 38 22C38 25.6974 36.7458 29.1019 34.6397 31.8113L43.3809 40.5565C43.7712 40.947 43.7712 41.5801 43.3807 41.9705L41.9665 43.3847C41.5759 43.7753 40.9426 43.7752 40.5521 43.3846L31.8113 34.6397C29.1019 36.7458 25.6974 38 22 38C13.1634 38 6 30.8366 6 22Z"
-                                ></path>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-                <div className={cx('right__container')}>
-                    <button className={cx('btn__upload')}>
-                        <svg
-                            className={cx('btn__upload--icon')}
-                            width="1em"
-                            data-e2e=""
-                            height="1em"
-                            viewBox="0 0 16 16"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M8 2.5C7.58579 2.5 7.25 2.83579 7.25 3.25V7.25H3.25C2.83579 7.25 2.5 7.58579 2.5 8C2.5 8.41421 2.83579 8.75 3.25 8.75H7.25V12.75C7.25 13.1642 7.58579 13.5 8 13.5C8.41421 13.5 8.75 13.1642 8.75 12.75V8.75H12.75C13.1642 8.75 13.5 8.41421 13.5 8C13.5 7.58579 13.1642 7.25 12.75 7.25H8.75V3.25C8.75 2.83579 8.41421 2.5 8 2.5Z"
-                            ></path>
-                        </svg>
-                        <p className={cx('btn__upload--text')}>Upload</p>
-                    </button>
-                    <button className={cx('btn__login')}>Log in</button>
-                    <button className={cx('btn__see-more')}>
-                        <svg
-                            width="20"
-                            data-e2e=""
-                            height="20"
-                            viewBox="0 0 48 48"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M24 4C26.2091 4 28 5.79086 28 8C28 10.2091 26.2091 12 24 12C21.7909 12 20 10.2091 20 8C20 5.79086 21.7909 4 24 4ZM24 20C26.2091 20 28 21.7909 28 24C28 26.2091 26.2091 28 24 28C21.7909 28 20 26.2091 20 24C20 21.7909 21.7909 20 24 20ZM24 36C26.2091 36 28 37.7909 28 40C28 42.2091 26.2091 44 24 44C21.7909 44 20 42.2091 20 40C20 37.7909 21.7909 36 24 36Z"
-                            ></path>
-                        </svg>
-                    </button>
-                </div>
+                <Search />
+                <Actions />
             </div>
         </div>
     );

@@ -1,0 +1,107 @@
+.accounts-title {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    color: rgba(22, 24, 35, 0.5);
+}
+
+.search-bar__form {
+    display: flex;
+    padding: 12px 16px;
+    background: rgba(22, 24, 35, 0.06);
+    border: 1.5px transparent;
+    border-radius: 92px;
+    margin: 0;
+    align-items: center;
+    position: relative;
+
+    &:focus-within {
+        border: 1.5px solid rgba(22, 24, 35, 0.2);
+    }
+
+    .search-bar__input {
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        background: transparent;
+        outline: none;
+        padding: 0;
+        width: 252px;
+        color: rgba(22, 24, 35, 1);
+        caret-color: rgba(254, 44, 85, 1);
+        appearance: textfield;
+    }
+
+    .search-bar__spacing {
+        width: 1px;
+        height: 28px;
+        margin: -3px 0;
+        background: rgba(22, 24, 35, 0.12);
+    }
+
+    .search-bar__icon {
+        &:hover {
+            background: rgba(22, 24, 35, 0.03);
+        }
+
+        &:active {
+            background: rgba(22, 24, 35, 0.06);
+        }
+
+        padding: 11px 16px 11px 12px;
+        margin: -12px -16px;
+        font-size: 0;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        margin-left: 0;
+        position: relative;
+        z-index: 1;
+        border-bottom-right-radius: 92px;
+        border-top-right-radius: 92px;
+    }
+
+    .lds-ring {
+        display: inline-block;
+        position: absolute;
+        left: 272px;
+        top: 7px;
+        z-index: 10000;
+    }
+    .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        margin: 8px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #000 transparent transparent transparent;
+    }
+    .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+    }
+    .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+    }
+    .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+    }
+    @keyframes lds-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.search-result {
+    width: 361px;
+}
