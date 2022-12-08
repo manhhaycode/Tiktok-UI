@@ -3,11 +3,9 @@ import styles from './Search.module.scss';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useRef, useState } from 'react';
 
-import * as searchServices from '~/services/searchService';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
-import RemoveIcon from '~/components/Icon/RemoveIcon';
-import SearchIcon from '~/components/Icon/SearchIcon';
+import { RemoveIcon, SearchIcon } from '~/components/Icon';
 
 const cx = classNames.bind(styles);
 
@@ -30,20 +28,6 @@ function Search() {
     });
 
     useEffect(() => {
-        // const fetchApi = async () => {
-        //     const result = await searchServices.search(searchValue);
-
-        //     if (!onClickOutside.current) {
-        //         setVisible(true);
-        //     } else {
-        //         setVisible(false);
-        //     }
-
-        //     setSearchResult(result);
-        //     setLoadAnimation(false);
-        //     clearTimeout(myTimeoutFetch.current);
-        // };
-
         clearTimeout(myTimeout.current);
         if (searchValue) {
             setLoadAnimation(false);

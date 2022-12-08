@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 
 import Search from '../Search';
 import Actions from '../Actions';
-import LogoIcon from '~/components/Icon/LogoIcon';
+import { LogoIcon } from '~/components/Icon';
 
 const cx = classNames.bind(styles);
 function Header() {
