@@ -3,7 +3,7 @@ import styles from './AccountItem.moudle.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ info }) {
     return (
         <div className={cx('wrapper')}>
             <img
