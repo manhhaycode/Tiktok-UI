@@ -129,15 +129,8 @@ export const PlusIcon = () => (
     </svg>
 );
 
-export const SearchIcon = () => (
-    <svg
-        width="24"
-        data-e2e=""
-        height="24"
-        viewBox="0 0 48 48"
-        fill="rgba(22, 24, 35, .34)"
-        xmlns="http://www.w3.org/2000/svg"
-    >
+export const SearchIcon = ({ fill = 'rgba(22, 24, 35, 0.34)' }) => (
+    <svg width="24" data-e2e="" height="24" viewBox="0 0 48 48" fill={fill} xmlns="http://www.w3.org/2000/svg">
         <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -275,5 +268,25 @@ export const BackBtnIcon = () => (
 export const ArrowIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="rgba(255, 255, 255, 1)" viewBox="0 0 24 8" width="20px" height="20px">
         <path d="M0 8c7 0 10-8 12-8s5 8 12 8z"></path>
+    </svg>
+);
+
+export const CheckIcon = () => (
+    <svg
+        width="14"
+        data-e2e=""
+        height="14"
+        viewBox="0 0 48 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ marginLeft: '4px' }}
+    >
+        <circle cx="24" cy="24" r="24" fill="#20D5EC"></circle>
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z"
+            fill="white"
+        ></path>
     </svg>
 );

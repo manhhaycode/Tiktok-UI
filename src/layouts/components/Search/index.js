@@ -14,10 +14,9 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [visible, setVisible] = useState(false);
     const [loadAnimation, setLoadAnimation] = useState(false);
-    const [searchResult, setSearchResult] = useState('');
+    const [searchResult, setSearchResult] = useState([]);
     const [render, setRender] = useState(true);
     const myTimeout = useRef();
-    const myTimeoutFetch = useRef();
     const onClickOutside = useRef(false);
     const onSelect = useRef(-1);
     const inputRef = useRef(null);
@@ -54,27 +53,18 @@ function Search() {
         clearTimeout(myTimeout.current);
         if (searchValue) {
             setLoadAnimation(false);
-            myTimeout.current = setTimeout(() => {
+            myTimeout.current = setTimeout(async () => {
                 setLoadAnimation(true);
                 setVisible(false);
                 setSearchResult('');
-                myTimeoutFetch.current = setTimeout(async () => {
-                    let res = await searchServices.search(searchValue, 'less');
-                    console.log(res);
-                    fetch(`https://jsonplaceholder.typicode.com/todos`)
-                        .then((res) => res.json())
-                        .then((posts) => {
-                            if (!onClickOutside.current) {
-                                setVisible(true);
-                            } else {
-                                setVisible(false);
-                            }
-                            setSearchResult(searchValue);
-                            setLoadAnimation(false);
-                            clearTimeout(myTimeoutFetch.current);
-                        })
-                        .catch((e) => console.log(e.message));
-                }, 1000);
+                let res = await searchServices.search(searchValue.trim(), 'less');
+                if (!onClickOutside.current) {
+                    setVisible(true);
+                } else {
+                    setVisible(false);
+                }
+                setSearchResult(res);
+                setLoadAnimation(false);
             }, 500);
         } else {
             setVisible(false);
@@ -101,14 +91,15 @@ function Search() {
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PopperWrapper>
-                                <div className={cx('accounts-title')}>{searchResult}</div>
+                                {/* <div className={cx('accounts-title')}>{searchResult}</div> */}
                                 <div className={cx('accounts-title')}>Accounts</div>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
+                                {searchResult &&
+                                    searchResult.map((item) => {
+                                        if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
+                                            item.avatar = '';
+                                        }
+                                        return <AccountItem key={item.id} data={item} />;
+                                    })}
                             </PopperWrapper>
                         </div>
                     )}
@@ -121,7 +112,11 @@ function Search() {
                         ref={inputRef}
                         className={cx('search-bar__input')}
                         onChange={(e) => {
-                            setSearchValue(e.target.value);
+                            if (e.target.value !== ' ') {
+                                setSearchValue(e.target.value);
+                            } else {
+                                e.target.value = '';
+                            }
                         }}
                         onFocus={(e) => {
                             onClickOutside.current = false;
@@ -159,7 +154,7 @@ function Search() {
 
                 <span className={cx('search-bar__spacing')}></span>
                 <button className={cx('search-bar__icon')} typeof="submit">
-                    <SearchIcon />
+                    <SearchIcon fill={searchValue ? 'rgba(22, 24, 35, 0.75);' : 'rgba(22, 24, 35, 0.34)'} />
                 </button>
             </form>
         </div>

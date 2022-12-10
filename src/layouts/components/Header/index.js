@@ -4,15 +4,17 @@ import styles from './Header.module.scss';
 import Search from '../Search';
 import Actions from '../Actions';
 import { LogoIcon } from '~/components/Icon';
+import { Link } from 'react-router-dom';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 function Header() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <a href="/" className={cx('logo')}>
+                <Link to={config.routes.home} className={cx('logo')}>
                     <LogoIcon />
-                </a>
+                </Link>
                 <Search />
                 <Actions />
             </div>
