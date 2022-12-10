@@ -3,10 +3,10 @@ import styles from './Search.module.scss';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { useEffect, useRef, useState } from 'react';
 
+import * as searchServices from '~/services/searchService';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
 import { RemoveIcon, SearchIcon } from '~/components/Icon';
-import { search } from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -58,7 +58,9 @@ function Search() {
                 setLoadAnimation(true);
                 setVisible(false);
                 setSearchResult('');
-                myTimeoutFetch.current = setTimeout(() => {
+                myTimeoutFetch.current = setTimeout(async () => {
+                    let res = await searchServices.search(searchValue, 'less');
+                    console.log(res);
                     fetch(`https://jsonplaceholder.typicode.com/todos`)
                         .then((res) => res.json())
                         .then((posts) => {
