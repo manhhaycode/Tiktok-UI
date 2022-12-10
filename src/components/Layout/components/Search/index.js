@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
 import { RemoveIcon, SearchIcon } from '~/components/Icon';
+import { search } from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
