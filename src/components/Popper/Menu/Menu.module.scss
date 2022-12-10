@@ -1,0 +1,28 @@
+.menu-item--box {
+}
+.wrapper-header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 50px;
+    margin-top: -8px;
+}
+
+.wrapper-header--text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.box {
+    position: relative;
+}
+
+.arrow-icon {
+    position: absolute;
+    display: flex;
+    top: -13px;
+    left: 177px;
+}

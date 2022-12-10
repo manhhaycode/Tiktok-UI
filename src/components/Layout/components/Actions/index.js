@@ -7,14 +7,18 @@ import {
     DarkModeIcon,
     FeedbackIcon,
     GetCoinIcon,
+    InboxIcon,
     KeyboardIcon,
     LanguageIcon,
     LiveStudioIcon,
+    MessageIcon,
     PlusIcon,
     ProfileViewIcon,
     SeeMoreIcon,
     SettingIcon,
 } from '~/components/Icon';
+import { Fragment } from 'react';
+import { Menu } from '~/components/Popper/Menu';
 
 const cx = classNames.bind(styles);
 
@@ -76,17 +80,40 @@ function Actions() {
         ...MENU_ITEMS,
     ];
 
-    console.log(USER_MENU);
     return (
         <div className={cx('right__container')}>
-            <Button className="btn__upload">
-                <PlusIcon />
-                <p className={cx('btn__upload--text')}>Upload</p>
-            </Button>
-            <Button className="btn__login">Log in</Button>
-            <Button className="btn__see-more">
-                <SeeMoreIcon />
-            </Button>
+            {userCurrent ? (
+                <Fragment>
+                    <Button className="btn__upload">
+                        <PlusIcon />
+                        <p className={cx('btn__upload--text')}>Upload</p>
+                    </Button>
+                    <Button className="btn__message">
+                        <MessageIcon />
+                    </Button>
+                    <Button className="btn__inbox">
+                        <InboxIcon />
+                    </Button>
+                </Fragment>
+            ) : (
+                <Fragment>
+                    <Button className="btn__upload">
+                        <PlusIcon />
+                        <p className={cx('btn__upload--text')}>Upload</p>
+                    </Button>
+                    <Button className="btn__login">Log in</Button>
+                </Fragment>
+            )}
+
+            <Menu items={userCurrent ? USER_MENU : MENU_ITEMS}>
+                {userCurrent ? (
+                    <div>accounts</div>
+                ) : (
+                    <Button className="btn__see-more">
+                        <SeeMoreIcon />
+                    </Button>
+                )}
+            </Menu>
         </div>
     );
 }

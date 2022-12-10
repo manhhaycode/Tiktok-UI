@@ -18,11 +18,33 @@ function Search() {
     const myTimeout = useRef();
     const myTimeoutFetch = useRef();
     const onClickOutside = useRef(false);
+    const onSelect = useRef(-1);
     const inputRef = useRef(null);
+
+    const getSelectedText = () => {
+        var text = '';
+        if (typeof window.getSelection != 'undefined') {
+            text = window.getSelection().toString();
+        } else if (typeof document.selection !== 'undefined' && document.selection.type === 'Text') {
+            text = document.selection.createRange().text;
+        }
+        return text;
+    };
+
+    const doSomethingWithSelectedText = () => {
+        var selectedText = getSelectedText();
+        if (selectedText) {
+            onSelect.current = 0;
+        }
+    };
 
     useEffect(() => {
         document.addEventListener('click', handleclick);
+        document.addEventListener('mouseup', doSomethingWithSelectedText);
+        document.addEventListener('mousedown', doSomethingWithSelectedText);
         return () => {
+            document.removeEventListener('mouseup', doSomethingWithSelectedText);
+            document.removeEventListener('mousedown', doSomethingWithSelectedText);
             document.removeEventListener('click', handleclick);
         };
     });
@@ -58,9 +80,13 @@ function Search() {
     }, [searchValue]);
 
     const handleclick = (e) => {
-        if (!inputRef.current.contains(e.target) && (loadAnimation || !visible)) {
-            onClickOutside.current = true;
-            setRender(!render);
+        if (!inputRef.current.contains(e.target) && !visible) {
+            if (onSelect.current === 0) {
+                onSelect.current = 1;
+            } else {
+                onClickOutside.current = true;
+                setRender(!render);
+            }
         }
     };
 
@@ -101,6 +127,12 @@ function Search() {
                                 setVisible(true);
                             }
                         }}
+                        onClick={(e) => {
+                            if (getSelectedText && onSelect.current === 1) {
+                                window.getSelection().removeAllRanges();
+                                onSelect.current = -1;
+                            }
+                        }}
                         value={searchValue}
                         typeof="search"
                         placeholder="Search accounts and videos"
@@ -130,5 +162,4 @@ function Search() {
         </div>
     );
 }
-
 export default Search;

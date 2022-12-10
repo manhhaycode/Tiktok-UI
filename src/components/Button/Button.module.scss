@@ -1,10 +1,13 @@
 .wrapper {
+    display: inline-flex;
+    align-items: center;
     border: 1px solid rgba(22, 24, 35, 0.12);
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     user-select: none;
     background: rgba(255, 255, 255, 1);
+    justify-content: center;
     + .wrapper {
         margin-left: 16px;
     }
@@ -46,4 +49,36 @@
     padding: 0 4px;
     display: flex;
     align-items: center;
+    margin-left: 16px;
+}
+
+.btn__inbox,
+.btn__message {
+    border: none;
+}
+
+.menu-item {
+    padding: 10px 8px 10px 16px;
+    border: none;
+    width: 100%;
+    justify-content: start;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.menu-item--children {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: normal;
+    padding: 10px 24px;
+    border: none;
+    width: 100%;
+    line-height: 20px;
+    justify-content: start;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
 }
