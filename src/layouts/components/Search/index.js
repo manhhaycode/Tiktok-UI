@@ -7,6 +7,7 @@ import * as searchServices from '~/services/searchService';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
 import { RemoveIcon, SearchIcon } from '~/components/Icon';
+import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -16,8 +17,10 @@ function Search() {
     const [loadAnimation, setLoadAnimation] = useState(false);
     const [searchResult, setSearchResult] = useState([]);
     const [render, setRender] = useState(true);
+    let location = useLocation();
     const myTimeout = useRef();
     const onClickOutside = useRef(false);
+    const onChangeLocation = useRef(false);
     const onSelect = useRef(-1);
     const inputRef = useRef(null);
 
@@ -50,8 +53,13 @@ function Search() {
     });
 
     useEffect(() => {
+        setVisible(false);
+        onClickOutside.current = false;
+    }, [location]);
+
+    useEffect(() => {
         clearTimeout(myTimeout.current);
-        if (searchValue) {
+        if (searchValue && !onChangeLocation.current) {
             setLoadAnimation(false);
             myTimeout.current = setTimeout(async () => {
                 setLoadAnimation(true);
@@ -67,6 +75,7 @@ function Search() {
                 setLoadAnimation(false);
             }, 500);
         } else {
+            onChangeLocation.current = false;
             setVisible(false);
             setRender((prev) => !prev);
         }
@@ -98,7 +107,16 @@ function Search() {
                                         if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
                                             item.avatar = '';
                                         }
-                                        return <AccountItem key={item.id} data={item} />;
+                                        return (
+                                            <AccountItem
+                                                key={item.id}
+                                                data={item}
+                                                onClick={() => {
+                                                    onChangeLocation.current = true;
+                                                    setSearchValue(item.full_name);
+                                                }}
+                                            />
+                                        );
                                     })}
                             </PopperWrapper>
                         </div>
@@ -112,6 +130,7 @@ function Search() {
                         ref={inputRef}
                         className={cx('search-bar__input')}
                         onChange={(e) => {
+                            console.log(e.target.value);
                             if (e.target.value !== ' ') {
                                 setSearchValue(e.target.value);
                             } else {

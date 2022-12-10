@@ -1,13 +1,14 @@
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import { CheckIcon } from '../Icon';
 import { Image } from '../Image';
 import styles from './AccountItem.moudle.scss';
 
 const cx = classNames.bind(styles);
 
-function AccountItem({ data }) {
+function AccountItem({ data, onClick = () => {} }) {
     return (
-        <div className={cx('wrapper')}>
+        <Link to="/@adinhsg" className={cx('wrapper')} onClick={onClick}>
             <Image className={cx('avatar')} src={data.avatar}></Image>
             <div className={cx('user-info--container')}>
                 <div className={cx('user-name')}>
@@ -16,7 +17,7 @@ function AccountItem({ data }) {
                 </div>
                 <div className={cx('user-nick-name')}>{data.nickname}</div>
             </div>
-        </div>
+        </Link>
     );
 }
 
