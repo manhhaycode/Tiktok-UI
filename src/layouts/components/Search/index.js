@@ -54,6 +54,7 @@ function Search() {
     });
 
     useEffect(() => {
+        onChangeLocation.current = false;
         setVisible(false);
         onClickOutside.current = false;
     }, [location]);
@@ -95,7 +96,6 @@ function Search() {
             setSearchValue(e.target.value);
             if (e.target.value === '') {
                 setRequestSearch(false);
-                onChangeLocation.current = false;
                 setVisible(false);
                 setRender((prev) => !prev);
             } else {
