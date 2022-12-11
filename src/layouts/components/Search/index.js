@@ -17,6 +17,7 @@ function Search() {
     const [loadAnimation, setLoadAnimation] = useState(false);
     const [searchResult, setSearchResult] = useState([]);
     const [render, setRender] = useState(true);
+    const [requestSearch, setRequestSearch] = useState(false);
     let location = useLocation();
     const myTimeout = useRef();
     const onClickOutside = useRef(false);
@@ -59,7 +60,7 @@ function Search() {
 
     useEffect(() => {
         clearTimeout(myTimeout.current);
-        if (searchValue && !onChangeLocation.current) {
+        if (requestSearch && !onChangeLocation.current) {
             setLoadAnimation(false);
             myTimeout.current = setTimeout(async () => {
                 setLoadAnimation(true);
@@ -74,12 +75,8 @@ function Search() {
                 setSearchResult(res);
                 setLoadAnimation(false);
             }, 500);
-        } else {
-            onChangeLocation.current = false;
-            setVisible(false);
-            setRender((prev) => !prev);
         }
-    }, [searchValue]);
+    }, [searchValue, requestSearch]);
 
     const handleclick = (e) => {
         if (!inputRef.current.contains(e.target) && !visible) {
@@ -89,6 +86,40 @@ function Search() {
                 onClickOutside.current = true;
                 setRender(!render);
             }
+        }
+    };
+
+    const handleChange = (e) => {
+        if (e.target.value !== ' ') {
+            setSearchValue(e.target.value);
+            if (e.target.value === '') {
+                setRequestSearch(false);
+                onChangeLocation.current = false;
+                setVisible(false);
+                setRender((prev) => !prev);
+            } else {
+                if (searchResult) {
+                    setVisible(true);
+                }
+                setRequestSearch(true);
+            }
+        } else {
+            e.target.value = '';
+        }
+    };
+
+    const handleFocus = (e) => {
+        onClickOutside.current = false;
+        setRender(!render);
+        if (e.target.value !== '') {
+            setVisible(true);
+        }
+    };
+
+    const handleOnClickInput = (e) => {
+        if (getSelectedText && onSelect.current === 1) {
+            window.getSelection().removeAllRanges();
+            onSelect.current = -1;
         }
     };
 
@@ -129,27 +160,9 @@ function Search() {
                     <input
                         ref={inputRef}
                         className={cx('search-bar__input')}
-                        onChange={(e) => {
-                            console.log(e.target.value);
-                            if (e.target.value !== ' ') {
-                                setSearchValue(e.target.value);
-                            } else {
-                                e.target.value = '';
-                            }
-                        }}
-                        onFocus={(e) => {
-                            onClickOutside.current = false;
-                            setRender(!render);
-                            if (e.target.value !== '') {
-                                setVisible(true);
-                            }
-                        }}
-                        onClick={(e) => {
-                            if (getSelectedText && onSelect.current === 1) {
-                                window.getSelection().removeAllRanges();
-                                onSelect.current = -1;
-                            }
-                        }}
+                        onChange={handleChange}
+                        onFocus={handleFocus}
+                        onClick={handleOnClickInput}
                         value={searchValue}
                         typeof="search"
                         placeholder="Search accounts and videos"
