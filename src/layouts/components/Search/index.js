@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import HeadlessTippy from '@tippyjs/react/headless';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import * as searchServices from '~/services/searchService';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
-import { RemoveIcon, SearchIcon } from '~/components/Icon';
+import { LoadingIcon, RemoveIcon, SearchIcon } from '~/components/Icon';
 import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -74,6 +74,7 @@ function Search() {
                 }
                 setSearchResult(res);
                 setLoadAnimation(false);
+                setRequestSearch(false);
             }, 500);
         }
     }, [searchValue, requestSearch]);
@@ -123,6 +124,10 @@ function Search() {
         }
     };
 
+    const handleOnClickRemove = () => {
+        setSearchValue('');
+    };
+
     return (
         <div className={cx('search-bar__container')}>
             <form className={cx('search-bar__form')}>
@@ -159,7 +164,9 @@ function Search() {
                 >
                     <input
                         ref={inputRef}
-                        className={cx('search-bar__input')}
+                        className={
+                            searchValue.length !== 0 ? cx('search-bar__input') : cx('search-bar__input--no-icon')
+                        }
                         onChange={handleChange}
                         onFocus={handleFocus}
                         onClick={handleOnClickInput}
@@ -168,20 +175,13 @@ function Search() {
                         placeholder="Search accounts and videos"
                     />
                 </HeadlessTippy>
-                <RemoveIcon
-                    fill={!loadAnimation && searchValue.length !== 0 ? 'rgba(22, 24, 35, .34)' : 'transparent'}
-                    onClick={() => {
-                        setSearchValue('');
-                        setSearchResult('');
-                    }}
-                />
-                {loadAnimation && (
-                    <div className={cx('lds-ring')}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
+
+                {loadAnimation ? (
+                    <LoadingIcon className={cx('loading-icon')} />
+                ) : searchValue.length !== 0 ? (
+                    <RemoveIcon onClick={handleOnClickRemove} />
+                ) : (
+                    <Fragment />
                 )}
 
                 <span className={cx('search-bar__spacing')}></span>

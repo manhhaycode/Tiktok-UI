@@ -217,13 +217,13 @@ export const LanguageIcon = () => (
     </svg>
 );
 
-export const RemoveIcon = ({ fill = 'transparent', onClick = () => {} }) => (
+export const RemoveIcon = ({ onClick = () => {} }) => (
     <svg
         onClick={onClick}
         width="16"
         height="16"
         viewBox="0 0 48 48"
-        fill={fill}
+        fill="rgba(22, 24, 35, 0.34)"
         xmlns="http://www.w3.org/2000/svg"
         style={{ margin: '0 12' }}
     >
@@ -287,6 +287,24 @@ export const CheckIcon = () => (
             clipRule="evenodd"
             d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z"
             fill="white"
+        ></path>
+    </svg>
+);
+
+export const LoadingIcon = ({ className }) => (
+    <svg
+        className={className}
+        width="16"
+        height="16"
+        viewBox="0 0 48 48"
+        fill="rgba(22, 24, 35, .34)"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ margin: '0px 12px' }}
+    >
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M24 12.5C17.6487 12.5 12.5 17.6487 12.5 24C12.5 30.3513 17.6487 35.5 24 35.5C26.8172 35.5 29.3919 34.4902 31.3919 32.8101C32.4491 31.9219 34.026 32.059 34.9142 33.1161C35.8023 34.1733 35.6653 35.7503 34.6081 36.6384C31.741 39.0471 28.0369 40.5 24 40.5C14.8873 40.5 7.5 33.1127 7.5 24C7.5 14.8873 14.8873 7.5 24 7.5C33.1127 7.5 40.5 14.8873 40.5 24C40.5 25.3807 39.3807 26.5 38 26.5C36.6193 26.5 35.5 25.3807 35.5 24C35.5 17.6487 30.3513 12.5 24 12.5Z"
         ></path>
     </svg>
 );
