@@ -86,3 +86,20 @@
         background: rgba(22, 24, 35, 0.03);
     }
 }
+
+.btn-login {
+    border-color: rgba(254, 44, 85, 1);
+    border-radius: 4px;
+    min-height: 48px;
+    margin-top: 20px;
+    width: 100%;
+    color: rgba(254, 44, 85, 1);
+    font-size: 18px;
+    font-weight: 600;
+    font-family: SofiaPro;
+    padding: 6px 8px;
+    line-height: 25px;
+    &:hover {
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}

@@ -92,6 +92,18 @@ a {
     font-weight: normal;
 }
 
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/fonts/sofiapro-medium.woff');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/fonts/sofiapro-semibold.otf');
+    font-weight: 600;
+}
+
 // Custom tippy tooltip
 body {
     .tippy-box {

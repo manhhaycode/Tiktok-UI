@@ -3,7 +3,7 @@ import styles from './Search.module.scss';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
-import * as searchServices from '~/services/searchService';
+import * as APIService from '~/services/APIService';
 import { WrapperSearch as PopperWrapper } from '~/components/Popper';
 import { AccountItem } from '~/components/AccountItem';
 import { LoadingIcon, RemoveIcon, SearchIcon } from '~/components/Icon';
@@ -69,7 +69,7 @@ function Search() {
                 setLoadAnimation(true);
                 setVisible(false);
                 setSearchResult('');
-                let res = await searchServices.search(searchValue.trim(), 'less');
+                let res = await APIService.search(searchValue.trim(), 'less');
                 if (!onClickOutside.current) {
                     if (!onChangeLocation.current) {
                         setVisible(true);
