@@ -125,6 +125,7 @@ function Search() {
 
     const handleOnClickRemove = () => {
         setSearchValue('');
+        onChangeLocation.current = false;
         setRequestSearch(false);
     };
 
