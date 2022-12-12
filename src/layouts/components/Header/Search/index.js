@@ -53,6 +53,10 @@ function Search() {
     });
 
     useEffect(() => {
+        if (location.pathname.charAt(1) !== '@') {
+            setSearchValue('');
+            setSearchResult([]);
+        }
         setVisible(false);
         onClickOutside.current = false;
     }, [location]);

@@ -7,6 +7,7 @@ import Upload from '~/Pages/Upload';
 import HeaderOnly from '~/layouts/HeaderOnly';
 import Search from '~/Pages/Search';
 import UserProfile from '~/Pages/UserProfile';
+import Live from '~/Pages/Live';
 
 //Public routes
 const publicRoutes = [
@@ -16,6 +17,7 @@ const publicRoutes = [
     { path: config.routes.profile, component: Profile },
     { path: config.routes.upload, component: Upload, layout: HeaderOnly },
     { path: config.routes.search, component: Search, layout: null },
+    { path: config.routes.live, component: Live },
 ];
 
 export { publicRoutes };
