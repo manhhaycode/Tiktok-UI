@@ -3,3 +3,8 @@
     min-height: 1000px;
     width: 356px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+}

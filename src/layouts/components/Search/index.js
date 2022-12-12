@@ -16,7 +16,6 @@ function Search() {
     const [visible, setVisible] = useState(false);
     const [loadAnimation, setLoadAnimation] = useState(false);
     const [searchResult, setSearchResult] = useState([]);
-    const [render, setRender] = useState(true);
     const [requestSearch, setRequestSearch] = useState(false);
     let location = useLocation();
     const myTimeout = useRef();
@@ -54,14 +53,13 @@ function Search() {
     });
 
     useEffect(() => {
-        onChangeLocation.current = false;
         setVisible(false);
         onClickOutside.current = false;
     }, [location]);
 
     useEffect(() => {
         clearTimeout(myTimeout.current);
-        if (requestSearch && !onChangeLocation.current) {
+        if (requestSearch) {
             setLoadAnimation(false);
             myTimeout.current = setTimeout(async () => {
                 setLoadAnimation(true);
@@ -69,14 +67,18 @@ function Search() {
                 setSearchResult('');
                 let res = await searchServices.search(searchValue.trim(), 'less');
                 if (!onClickOutside.current) {
-                    setVisible(true);
+                    if (!onChangeLocation.current) {
+                        setVisible(true);
+                    } else {
+                        onChangeLocation.current = false;
+                    }
                 } else {
                     setVisible(false);
                 }
                 setSearchResult(res);
                 setLoadAnimation(false);
                 setRequestSearch(false);
-            }, 500);
+            }, 700);
         }
     }, [searchValue, requestSearch]);
 
@@ -86,7 +88,6 @@ function Search() {
                 onSelect.current = 1;
             } else {
                 onClickOutside.current = true;
-                setRender(!render);
             }
         }
     };
@@ -97,7 +98,6 @@ function Search() {
             if (e.target.value === '') {
                 setRequestSearch(false);
                 setVisible(false);
-                setRender((prev) => !prev);
             } else {
                 if (searchResult) {
                     setVisible(true);
@@ -111,7 +111,6 @@ function Search() {
 
     const handleFocus = (e) => {
         onClickOutside.current = false;
-        setRender(!render);
         if (e.target.value !== '') {
             setVisible(true);
         }
@@ -126,6 +125,7 @@ function Search() {
 
     const handleOnClickRemove = () => {
         setSearchValue('');
+        setRequestSearch(false);
     };
 
     return (
@@ -150,6 +150,7 @@ function Search() {
                                                 onClick={() => {
                                                     onChangeLocation.current = true;
                                                     setSearchValue(item.full_name);
+                                                    setRequestSearch(true);
                                                 }}
                                             />
                                         );
