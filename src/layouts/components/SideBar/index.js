@@ -21,14 +21,14 @@ function SideBar() {
     const [suggestedAccounts, setSuggestedAccounts] = useState([]);
     useEffect(() => {
         setTimeout(async () => {
-            const res = await APIService.suggestedAccounts(1, 5);
-            setSuggestedAccounts(res);
+            const res = await APIService.suggestedAccounts(1, 10);
+            const res2 = await APIService.suggestedAccounts(2, 10);
+            setSuggestedAccounts([...res, ...res2]);
         });
     }, []);
 
     return (
         <div className={cx('wrapper')}>
-            {console.log(suggestedAccounts)}
             <div className={cx('container')}>
                 <Menu className="main-nav__container">
                     <MenuItem to={'/'} icon={<HomeIcon />} iconAcive={<HomeIconActive />}>
@@ -50,9 +50,9 @@ function SideBar() {
                 </div>
 
                 {suggestedAccounts && (
-                    <SuggestedAccounts>
+                    <SuggestedAccounts data={suggestedAccounts}>
                         <div>
-                            {suggestedAccounts.map((item) => {
+                            {suggestedAccounts.slice(0, 5).map((item) => {
                                 if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
                                     item.avatar = '';
                                 }

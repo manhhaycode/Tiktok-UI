@@ -6,6 +6,7 @@
     color: rgba(22, 24, 35, 0.75);
     font-size: 14px;
     font-weight: 600;
+    user-select: none;
     &::before {
         content: '';
         position: absolute;
@@ -17,7 +18,7 @@
         transform: scaleY(0.5);
     }
 }
-.see-all,
+.see,
 .title {
     padding: 0 8px;
     margin-bottom: 8px;
@@ -26,7 +27,7 @@
     margin-bottom: 8px;
 }
 
-.see-all {
+.see {
     margin-top: 8px;
     margin-bottom: 0;
     color: rgb(254, 44, 85);
@@ -39,6 +40,7 @@
     flex-direction: row;
     align-items: center;
     max-height: 48px;
+    cursor: pointer;
 
     .avatar {
         height: 32px;
