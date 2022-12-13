@@ -51,20 +51,16 @@ function SideBar() {
                             Log in
                         </Button>
                     </div>
-                    {suggestedAccounts.length > 0 ? (
-                        <SuggestedAccounts data={suggestedAccounts}>
-                            <div>
-                                {suggestedAccounts.slice(0, 5).map((item) => {
-                                    if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
-                                        item.avatar = '';
-                                    }
-                                    return <AccountItem key={item.id} data={item} />;
-                                })}
-                            </div>
-                        </SuggestedAccounts>
-                    ) : (
-                        <SuggestedAccountsLoading />
-                    )}
+                    <SuggestedAccounts data={suggestedAccounts}>
+                        <div>
+                            {suggestedAccounts.slice(0, 5).map((item) => {
+                                if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
+                                    item.avatar = '';
+                                }
+                                return <AccountItem key={item.id} data={item} />;
+                            })}
+                        </div>
+                    </SuggestedAccounts>
                     <Discover></Discover>
                     <LinkList></LinkList>
                 </div>
