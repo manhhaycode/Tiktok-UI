@@ -1,0 +1,45 @@
+.wrapper {
+    padding-top: 16px;
+    padding-left: 8px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        top: 0;
+        height: 1px;
+        background: rgba(22, 24, 35, 0.12);
+        transform: scaleY(0.5);
+    }
+}
+
+.list__container {
+    margin-bottom: 8px;
+}
+
+.link-item {
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 5px;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: rgba(22, 24, 35, 0.5);
+    }
+}
+
+.logo-text {
+    color: rgba(22, 24, 35, 0.5);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 5px;
+}

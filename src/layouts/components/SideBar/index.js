@@ -13,6 +13,9 @@ import {
 } from '~/components/Icon';
 import { AccountItem, SuggestedAccounts } from './SuggestedAccounts';
 import { useEffect, useState } from 'react';
+import { Discover } from './Discover';
+import { LinkList } from './LinkList';
+import { SuggestedAccountsLoading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +27,7 @@ function SideBar() {
             const res = await APIService.suggestedAccounts(1, 10);
             const res2 = await APIService.suggestedAccounts(2, 10);
             setSuggestedAccounts([...res, ...res2]);
-        });
+        }, 1500);
     }, []);
 
     return (
@@ -48,7 +51,7 @@ function SideBar() {
                             Log in
                         </Button>
                     </div>
-                    {suggestedAccounts && (
+                    {suggestedAccounts.length > 0 ? (
                         <SuggestedAccounts data={suggestedAccounts}>
                             <div>
                                 {suggestedAccounts.slice(0, 5).map((item) => {
@@ -59,7 +62,11 @@ function SideBar() {
                                 })}
                             </div>
                         </SuggestedAccounts>
+                    ) : (
+                        <SuggestedAccountsLoading />
                     )}
+                    <Discover></Discover>
+                    <LinkList></LinkList>
                 </div>
             </div>
         </div>

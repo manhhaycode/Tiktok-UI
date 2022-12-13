@@ -1,0 +1,108 @@
+.wrapper {
+    .container {
+        display: flex;
+        align-items: center;
+        height: 48px;
+        padding: 8px;
+    }
+
+    .circle-load {
+        width: 32px !important;
+        height: 32px !important;
+        background-color: rgba(22, 24, 35, 0.06);
+        background-image: linear-gradient(
+            90deg,
+            rgba(22, 24, 35, 0) 0%,
+            rgba(22, 24, 35, 0.04) 50%,
+            rgba(22, 24, 35, 0) 100%
+        );
+        -webkit-background-size: 200% 100%;
+        background-size: 200% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        animation: animation-91vjld cubic-bezier(0, 0, 1, 1) 1.5s infinite;
+    }
+
+    .bar-long--load {
+        width: 107px !important;
+        height: 12px !important;
+        background-color: rgba(22, 24, 35, 0.06);
+        border-radius: 4px;
+        background-image: linear-gradient(
+            90deg,
+            rgba(22, 24, 35, 0) 0%,
+            rgba(22, 24, 35, 0.04) 50%,
+            rgba(22, 24, 35, 0) 100%
+        );
+        background-size: 200% 100%;
+        background-repeat: no-repeat;
+        animation: animation-91vjld cubic-bezier(0, 0, 1, 1) 1.5s infinite;
+    }
+
+    .bar-short--load {
+        width: 66px !important;
+        height: 12px !important;
+        background-color: rgba(22, 24, 35, 0.06);
+        border-radius: 4px;
+        background-image: linear-gradient(
+            90deg,
+            rgba(22, 24, 35, 0) 0%,
+            rgba(22, 24, 35, 0.04) 50%,
+            rgba(22, 24, 35, 0) 100%
+        );
+        background-size: 200% 100%;
+        background-repeat: no-repeat;
+        animation: animation-91vjld cubic-bezier(0, 0, 1, 1) 1.5s infinite;
+    }
+
+    .bar-load {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 48px;
+        margin-left: 12px;
+    }
+}
+
+.discover-bar-wrapper {
+    .discover-bar {
+        overflow: hidden;
+        width: 208px;
+        height: 24px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        background: rgb(241, 241, 241);
+    }
+
+    .discover-bar--LinearGradient {
+        width: 120px;
+        height: 24px;
+        background: linear-gradient(
+            90deg,
+            rgba(22, 24, 35, 0) 0%,
+            rgba(22, 24, 35, 0.06) 50.52%,
+            rgba(22, 24, 35, 0) 100%
+        );
+        animation: 1.5s cubic-bezier(0, 0, 1, 1) 0s infinite normal none running animation-1i0j9nf;
+    }
+}
+
+@keyframes animation-91vjld {
+    0% {
+        background-position-x: 200%;
+    }
+    100% {
+        background-position-x: -150%;
+    }
+}
+
+@keyframes animation-1i0j9nf {
+    0% {
+        transform: translateX(-240px);
+    }
+    100% {
+        transform: translateX(328px);
+    }
+}

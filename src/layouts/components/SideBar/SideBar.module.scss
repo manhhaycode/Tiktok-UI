@@ -16,6 +16,16 @@
     padding-right: 8px;
 
     &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar {
+            display: block;
+        }
+    }
+
+    &::-webkit-scrollbar {
         border-radius: 0;
         width: 6px;
     }
@@ -31,7 +41,7 @@
     flex-direction: column;
     padding: 20px 0 26px;
     padding-left: 8px;
-    max-width: 340px;
+    width: 348px;
 }
 
 .login-container {
