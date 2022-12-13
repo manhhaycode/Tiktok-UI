@@ -1,8 +1,29 @@
-.wrapper {
-    height: 100%;
-    min-height: 1000px;
+.DivSideNavContainer {
     width: 356px;
+}
+.wrapper {
+    overflow: hidden auto;
+    overscroll-behavior-y: contain;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    perspective-origin: right top;
+    top: 60px;
+    bottom: 0px;
+    width: 356px;
+    background: rgb(255, 255, 255);
+    position: fixed;
+    z-index: 99;
     padding-right: 8px;
+
+    &::-webkit-scrollbar {
+        border-radius: 0;
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: rgba(22, 24, 35, 0.06);
+    }
 }
 
 .container {
@@ -10,6 +31,7 @@
     flex-direction: column;
     padding: 20px 0 26px;
     padding-left: 8px;
+    max-width: 340px;
 }
 
 .login-container {
