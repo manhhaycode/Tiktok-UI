@@ -1,5 +1,11 @@
+import { Main } from '~/layouts/components/Main';
+
 function Home() {
-    return <div style={{ height: '10000px' }}>Home</div>;
+    return (
+        <Main>
+            <div style={{ height: '10000px' }}>Home</div>
+        </Main>
+    );
 }
 
 export default Home;

@@ -27,3 +27,18 @@ export const suggestedAccounts = async (page, per_page) => {
         console.log(error);
     }
 };
+
+export const videoList = async (type, page) => {
+    try {
+        const res = await httpRequest.get('/videos', {
+            params: {
+                type,
+                page,
+            },
+        });
+        console.log('success');
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};

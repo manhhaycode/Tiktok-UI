@@ -1,0 +1,70 @@
+.wrapper {
+    .DivContentContainer {
+        margin-left: 12px;
+        width: 624px;
+    }
+    .container-item {
+        padding: 20px 0;
+        display: flex;
+        align-items: flex-start;
+    }
+    .avatar {
+        height: 56px;
+        width: 56px;
+        display: inline-block;
+        box-sizing: border-box;
+        overflow: hidden;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 32px;
+        border-radius: 50%;
+        background-color: rgba(136, 136, 136, 0.5);
+        border-color: rgba(22, 24, 35, 0.12);
+        border-width: 0.5px;
+        cursor: pointer;
+    }
+    .icon-check {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .container-item--nickname {
+        font-family: SofiaPro;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        display: inline-block;
+        margin-right: 4px;
+    }
+
+    .container-item--bio {
+        font-family: ProximaNova;
+        font-weight: 400;
+        font-size: 14px;
+        display: inline-block;
+        line-height: 28px;
+    }
+
+    .description {
+        font-family: ProximaNova;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .text-description {
+    }
+
+    .hastag-description {
+        display: inline-block;
+        font-weight: 600;
+        color: rgb(22, 24, 35);
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: rgb(22, 24, 35);
+        }
+    }
+}
