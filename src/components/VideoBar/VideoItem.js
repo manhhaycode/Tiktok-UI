@@ -79,7 +79,7 @@ function VideoItem({ data }) {
                                     <Fragment key={index}>
                                         <a
                                             className={cx('hastag-description')}
-                                            href={`https://www.tiktok.com/tag/${item.text}`}
+                                            href={`https://www.tiktok.com/tag/${item.text.split('#')[1]}`}
                                             target="blank"
                                         >
                                             {item.text}
