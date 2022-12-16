@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import useElementOnScreen from '~/hooks/useElementOnScreen';
 import { actions, useStore } from '~/store';
-import { PlayIcon, UnMutedIcon } from '../Icon';
+import { MutedIcon, PauseIcon, PlayIcon, UnMutedIcon } from '../Icon';
 import { Image } from '../Image';
 import styles from './VideoBar.module.scss';
 
@@ -19,26 +19,12 @@ function VideoPlay({ data }) {
 
     useEffect(() => {
         if (isVisible) {
+            setPlaying(true);
             videoRef.current.volume = state.volume / 100;
-            if (!playing) {
-                // Rewind the video and play from beginning
-                setTimeout(function () {
-                    if (videoRef.current) {
-                        videoRef.current.currentTime = 0;
-                        videoRef.current.muted = state.muted;
-                        videoRef.current.addEventListener('canplay', () => {
-                            setPlaying(true);
-                        });
-                    }
-                }, 200);
-            }
         } else {
-            if (playing && videoRef.current) {
-                videoRef.current.pause();
-                setPlaying(false);
-            }
+            setPlaying(false);
         }
-    }, [isVisible, playing, state.muted, state.volume]);
+    }, [isVisible, state.muted, state.volume]);
 
     return (
         <div className={cx('DivVideoWrapper')}>
@@ -54,14 +40,25 @@ function VideoPlay({ data }) {
                                 className={cx('video-play')}
                                 mediatype="video"
                                 src={data.file_url}
-                                muted={state.muted}
+                                muted={state.volume === '0'}
                                 playsInline
                                 autoPlay
                                 loop
                                 webkitplaysinline="true"
                             ></video>
-                            <div className={cx('video-controls-statePlaying')}>
-                                <PlayIcon />
+                            <div
+                                className={cx('video-controls-statePlaying')}
+                                onClick={() => {
+                                    if (playing) {
+                                        videoRef.current.pause();
+                                        setPlaying(false);
+                                    } else {
+                                        setPlaying(true);
+                                        videoRef.current.play();
+                                    }
+                                }}
+                            >
+                                {playing ? <PlayIcon /> : <PauseIcon />}
                             </div>
                             <div className={cx('video-controls-volume')}>
                                 <div className={cx('sound-controls')}>
@@ -83,13 +80,19 @@ function VideoPlay({ data }) {
                                         max="100"
                                         step="1"
                                         onInput={(e) => {
+                                            console.log(e.target.value);
                                             dispatch(actions.setVolume(e.target.value));
                                         }}
                                     />
                                 </div>
 
-                                <div className={cx('video-sound')}>
-                                    <UnMutedIcon />
+                                <div
+                                    className={cx('video-sound')}
+                                    onClick={() => {
+                                        dispatch(actions.setVolume(state.volume === '0' ? '50' : '0'));
+                                    }}
+                                >
+                                    {state.volume === '0' ? <MutedIcon /> : <UnMutedIcon />}
                                 </div>
                             </div>
                         </div>
