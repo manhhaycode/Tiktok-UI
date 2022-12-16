@@ -15,7 +15,6 @@ import { AccountItem, SuggestedAccounts } from './SuggestedAccounts';
 import { useEffect, useState } from 'react';
 import { Discover } from './Discover';
 import { LinkList } from './LinkList';
-import { SuggestedAccountsLoading } from '~/components/Loading';
 
 const cx = classNames.bind(styles);
 

@@ -36,7 +36,6 @@ export const videoList = async (type, page) => {
                 page,
             },
         });
-        console.log('success');
         return res;
     } catch (error) {
         console.log(error);

@@ -12,12 +12,10 @@ function SuggestedAccounts({ children, data }) {
         <div className={cx('wrapper')}>
             <span className={cx('title')}>Suggested accounts</span>
             {children}
-            {console.log(data.length)}
             {data.length === 0 && <SuggestedAccountsLoading />}
             {seeMore &&
                 data.length > 0 &&
                 data.slice(5).map((item) => {
-                    console.log('see all');
                     if (item.avatar === 'https://files.fullstack.edu.vn/f8-tiktok/') {
                         item.avatar = '';
                     }

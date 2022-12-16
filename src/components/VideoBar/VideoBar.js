@@ -7,8 +7,9 @@ const cx = classNames.bind(styles);
 function VideoBar({ children, data }) {
     return (
         <div className={cx('wrapper')}>
-            <VideoItem data={data}></VideoItem>
-            <span>a</span>
+            {data.map((item, index) => {
+                return <VideoItem key={index} data={item}></VideoItem>;
+            })}
         </div>
     );
 }

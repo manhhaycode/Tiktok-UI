@@ -12,14 +12,12 @@ function Main() {
     useEffect(() => {
         setTimeout(async () => {
             const res = await APIService.videoList('for-you', 1);
-            console.log(res);
             setVideoList(res);
-        }, 2000);
+        });
     }, []);
 
     return (
         <div className={cx('DivMainContainer')}>
-            {console.log(JSON.stringify(videoList) !== '{}')}
             <div className={cx('wrapper')}></div>
             {JSON.stringify(videoList) !== '{}' && <VideoBar data={videoList.data} />}
         </div>

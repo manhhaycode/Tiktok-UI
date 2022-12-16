@@ -1,7 +1,7 @@
 import styles from './Discover.module.scss';
 import classNames from 'classnames/bind';
 import DiscoverItem from './DiscoverItem';
-import { MusicIcon, TagIcon } from '~/components/Icon';
+import { TagIcon } from '~/components/Icon';
 import { DiscoverLoading } from '~/components/Loading';
 import { useEffect, useState } from 'react';
 

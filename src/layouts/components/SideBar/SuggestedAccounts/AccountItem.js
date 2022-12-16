@@ -1,4 +1,3 @@
-import Tippy from '@tippyjs/react/headless';
 import styles from './SuggestedAcounts.module.scss';
 import classNames from 'classnames/bind';
 import { Image } from '~/components/Image';
