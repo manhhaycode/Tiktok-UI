@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
-import useElementOnScreen from '~/hooks/useElementOnScreen';
+import { useElementOnScreen, useAspectRatioVideo } from '~/hooks';
 import { actions, useStore } from '~/store';
 import { MutedIcon, PauseIcon, PlayIcon, UnMutedIcon, VideoReportIcon } from '../Icon';
 import { Image } from '../Image';
@@ -13,7 +13,8 @@ function VideoPlay({ data }) {
     const ref = useRef(null);
     const inputRef = useRef(null);
     const videoRef = useRef();
-    let isVisible = useElementOnScreen(ref, { threshold: 0.5 });
+    let videoAspectRaito = useAspectRatioVideo(data.meta);
+    let isVisible = useElementOnScreen(ref, { threshold: [0.4, 0.8] }, data.user.nickname);
     const [playingClick, setPlayingClick] = useState(true);
 
     useEffect(() => {
@@ -27,14 +28,8 @@ function VideoPlay({ data }) {
     return (
         <div className={cx('DivVideoWrapper')}>
             <div className={cx('wrapper-video-play')}>
-                <canvas width="56" height="100" className={cx('canvas')}></canvas>
-                <div
-                    className={cx('video-card--container')}
-                    ref={ref}
-                    onMouseOver={() => {
-                        setTimeout(() => {});
-                    }}
-                >
+                <canvas width={videoAspectRaito.x} height={videoAspectRaito.y} className={cx('canvas')}></canvas>
+                <div className={cx('video-card--container')} ref={ref}>
                     <Image src={data.thumb_url} className={cx('thumb-video')}></Image>
                     {isVisible && (
                         <div className={cx('video-play--container')}>
@@ -42,6 +37,7 @@ function VideoPlay({ data }) {
                                 ref={videoRef}
                                 onClick={(e) => {}}
                                 className={cx('video-play')}
+                                controls={false}
                                 mediatype="video"
                                 src={data.file_url}
                                 muted={state.volume === '0'}

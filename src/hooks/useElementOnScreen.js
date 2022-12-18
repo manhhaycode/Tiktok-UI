@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 
-const useElementOnScreen = (targetRef, options) => {
+const useElementOnScreen = (targetRef, options, data) => {
     const [isVisible, setIsVisible] = useState();
 
     const callbackFunc = (entries) => {
         const [entry] = entries;
-        setIsVisible(entry.isIntersecting);
+        if (entry.intersectionRatio >= 0.75) {
+            setIsVisible(true);
+        } else {
+            setIsVisible(false);
+        }
     };
 
     useEffect(() => {
@@ -14,6 +18,9 @@ const useElementOnScreen = (targetRef, options) => {
         if (currentTarget) {
             observer.observe(currentTarget);
         }
+        return () => {
+            observer.unobserve(currentTarget);
+        };
     }, [options, targetRef]);
 
     return isVisible;

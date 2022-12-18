@@ -51,14 +51,14 @@ function VideoItem({ data }) {
                     </div>
                 </div>
 
-                {data.music !== '' && (
-                    <div className={cx('format-media--container')}>
+                <div className={cx('format-media--container')}>
+                    {data.music !== '' && (
                         <Link to={'/'} className={cx('format-media')}>
                             <MusicIcon className={cx('format-media--icon')} />
                             {data.music}
                         </Link>
-                    </div>
-                )}
+                    )}
+                </div>
 
                 <VideoPlay data={data} />
             </div>
