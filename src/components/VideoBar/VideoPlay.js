@@ -14,7 +14,7 @@ function VideoPlay({ data }) {
     const inputRef = useRef(null);
     const videoRef = useRef();
     let videoAspectRaito = useAspectRatioVideo(data.meta);
-    let isVisible = useElementOnScreen(ref, { threshold: [0.4, 0.8] }, data.user.nickname);
+    let isVisible = useElementOnScreen(ref, { threshold: [0.4, 0.8] }, 0.75);
     const [playingClick, setPlayingClick] = useState(true);
 
     useEffect(() => {

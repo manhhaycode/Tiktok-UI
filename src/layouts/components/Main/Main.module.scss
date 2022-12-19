@@ -11,3 +11,60 @@
 .wrapper {
     position: relative;
 }
+
+.end-list {
+    .main-loading {
+        margin: 8px auto;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .circle {
+        width: 15px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0;
+        position: relative;
+    }
+
+    .first {
+        background: #fe2c55;
+        -webkit-animation: clockwise 1200ms infinite linear;
+        animation: clockwise 1200ms infinite linear;
+    }
+
+    .second {
+        mix-blend-mode: darken;
+        background: #25f4ee;
+        margin-left: -5px;
+        -webkit-animation: counter-clockwise 1200ms infinite linear;
+        animation: counter-clockwise 1200ms infinite linear;
+    }
+}
+
+@keyframes clockwise {
+    0% {
+        transform: translateX(0);
+        width: 15px;
+    }
+    25% {
+        width: 20px;
+    }
+    50% {
+        transform: translateX(100%);
+        width: 15px;
+    }
+}
+
+@keyframes counter-clockwise {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+}
