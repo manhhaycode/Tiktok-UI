@@ -21,7 +21,7 @@ function AccountPreview({ children, data }) {
                     </div>
                     <Link to="/" className={cx('profile-nickname')}>
                         {data.nickname}
-                        <CheckIcon />
+                        {data.tick && <CheckIcon />}
                     </Link>
                     <Link to="/" className={cx('profile-full-name')}>{`${data.first_name}  ${data.last_name}`}</Link>
                     <div className={cx('profile-popular-count')}>

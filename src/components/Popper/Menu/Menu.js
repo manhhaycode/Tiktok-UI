@@ -59,8 +59,8 @@ function Menu({ children, items = [] }, onChange = () => {}) {
     };
 
     const renderResult = (attrs) => (
-        <motion.div className="box" tabIndex="-1" {...attrs} style={{ cursor: 'pointer', opacity, scale }}>
-            <Wrapper>
+        <motion.div className={cx('box')} tabIndex="-1" {...attrs} style={{ cursor: 'pointer', opacity, scale }}>
+            <Wrapper style={{ paddingBottom: '8px' }}>
                 <div className={cx('arrow-icon')}>
                     <ArrowIcon />
                 </div>
