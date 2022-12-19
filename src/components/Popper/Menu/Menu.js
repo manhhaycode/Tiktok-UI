@@ -65,7 +65,7 @@ function Menu({ children, items = [] }, onChange = () => {}) {
                     <ArrowIcon />
                 </div>
                 {history.length > 1 ? <Header title={history[history.length - 1].title} goBack={handleBack} /> : <></>}
-                {renderItems(!!(history.length > 1))}
+                {renderItems(history.length > 1)}
             </Wrapper>
         </motion.div>
     );

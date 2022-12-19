@@ -42,6 +42,10 @@
     max-height: 48px;
     cursor: pointer;
 
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+
     .avatar {
         height: 32px;
         width: 32px;

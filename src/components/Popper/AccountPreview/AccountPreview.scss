@@ -1,0 +1,63 @@
+.box {
+    position: relative;
+    top: -10px;
+    width: 300px;
+}
+
+.DivProfileContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .btn-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .img-popper {
+        height: 44px;
+        width: 44px;
+        border-radius: 50%;
+    }
+
+    .profile-nickname {
+        color: rgb(22, 24, 35);
+        font-family: SofiaPro;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .profile-full-name {
+        font-family: ProximaNova;
+        font-weight: 600;
+        font-size: 14px;
+        color: rgba(22, 24, 35, 1);
+        margin-top: 4px;
+        line-height: normal;
+    }
+
+    .profile-popular-count {
+        display: flex;
+        margin-top: 8px;
+    }
+
+    .popular-count--container {
+        display: flex;
+        color: rgba(22, 24, 35, 0.75);
+        font-size: 17px;
+        line-height: 20px;
+        margin-right: 12px;
+        align-items: center;
+    }
+
+    .count {
+        font-weight: 700;
+        margin-right: 6px;
+        font-size: 17px;
+        line-height: 20px;
+        color: rgba(22, 24, 35, 1);
+    }
+}
