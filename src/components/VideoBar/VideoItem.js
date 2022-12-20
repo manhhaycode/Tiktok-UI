@@ -2,8 +2,10 @@ import classNames from 'classnames/bind';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDescription } from '~/hooks';
+import Button from '../Button/Button';
 import { CheckIcon, MusicIcon } from '../Icon';
 import { Image } from '../Image';
+import { AccountPreview } from '../Popper/AccountPreview';
 import styles from './VideoBar.module.scss';
 import VideoPlay from './VideoPlay';
 
@@ -14,15 +16,22 @@ function VideoItem({ data }) {
 
     return (
         <div className={cx('container-item')}>
-            <Image className={cx('avatar')} src={data.user.avatar} />
+            <AccountPreview data={data.user} isVideo={true}>
+                <Image className={cx('avatar')} src={data.user.avatar} />
+            </AccountPreview>
             <div className={cx('DivContentContainer')}>
-                <Link to="/" className={cx('container-item--info')}>
-                    <div className={cx('container-item--nickname')}>
-                        {data.user.nickname}
-                        {data.user.tick && <CheckIcon />}
-                    </div>
-                    <div className={cx('container-item--bio')}>{data.user.bio}</div>
-                </Link>
+                <AccountPreview data={data.user} isVideo={true}>
+                    <Link to="/" className={cx('container-item--info')}>
+                        <div className={cx('container-item--nickname')}>
+                            {data.user.nickname}
+                            {data.user.tick && <CheckIcon />}
+                        </div>
+                        <div
+                            className={cx('container-item--bio')}
+                        >{`${data.user.first_name} ${data.user.last_name}`}</div>
+                    </Link>
+                </AccountPreview>
+                <Button className="btn-follow-video">Follow</Button>
                 <div className={cx('container-item--des')}>
                     <div className="description">
                         {Array.isArray(description) &&
@@ -52,12 +61,10 @@ function VideoItem({ data }) {
                 </div>
 
                 <div className={cx('format-media--container')}>
-                    {data.music !== '' && (
-                        <Link to={'/'} className={cx('format-media')}>
-                            <MusicIcon className={cx('format-media--icon')} />
-                            {data.music}
-                        </Link>
-                    )}
+                    <Link to={'/'} className={cx('format-media')}>
+                        <MusicIcon className={cx('format-media--icon')} />
+                        {data.music}
+                    </Link>
                 </div>
 
                 <VideoPlay data={data} />

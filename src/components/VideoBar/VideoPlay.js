@@ -4,6 +4,7 @@ import { useElementOnScreen, useAspectRatioVideo } from '~/hooks';
 import { actions, useStore } from '~/store';
 import { MutedIcon, PauseIcon, PlayIcon, UnMutedIcon, VideoReportIcon } from '../Icon';
 import { Image } from '../Image';
+import VideoAction from './VideoAction';
 import styles from './VideoBar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,9 +15,8 @@ function VideoPlay({ data }) {
     const inputRef = useRef(null);
     const videoRef = useRef();
     let videoAspectRaito = useAspectRatioVideo(data.meta);
-    let isVisible = useElementOnScreen(ref, { threshold: [0, 0.25, 0.5, 0.75, 1] }, 0.6);
+    let isVisible = useElementOnScreen(ref, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }, 0.6);
     const [playingClick, setPlayingClick] = useState(true);
-    const refLoading = useRef(null);
 
     useEffect(() => {
         if (isVisible) {
@@ -106,6 +106,7 @@ function VideoPlay({ data }) {
                     )}
                 </div>
             </div>
+            <VideoAction data={data} />
         </div>
     );
 }

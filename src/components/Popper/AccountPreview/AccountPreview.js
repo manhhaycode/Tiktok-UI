@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function AccountPreview({ children, data }) {
+function AccountPreview({ children, data, isVideo = false }) {
     const render = (attrs) => (
-        <div className={cx('box')} tabIndex="-1" {...attrs}>
+        <div className={cx('box', { isVideo })} tabIndex="-1" {...attrs} style={{ width: isVideo ? 320 : 300 }}>
             <Wrapper>
                 <div className={cx('DivProfileContainer')}>
                     <div className="btn-actions">
                         <Image src={data.avatar} className={cx('img-popper')} />
-                        <Button className="btn-follow-popper">Follow</Button>
+                        <Button className={isVideo ? 'btn-follow-video-popper' : 'btn-follow-popper'}>Follow</Button>
                     </div>
                     <Link to="/" className={cx('profile-nickname')}>
                         {data.nickname}
@@ -34,6 +34,7 @@ function AccountPreview({ children, data }) {
                             Likes
                         </div>
                     </div>
+                    {isVideo && <p className={cx('profile-bio')}>{data.bio}</p>}
                 </div>
             </Wrapper>
         </div>

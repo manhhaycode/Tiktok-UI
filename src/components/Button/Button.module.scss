@@ -126,3 +126,71 @@
     cursor: pointer;
     box-sizing: border-box;
 }
+
+.btn-follow-video {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(254, 44, 85);
+    border-color: rgb(254, 44, 85);
+    background-color: rgb(255, 255, 255);
+    min-height: 28px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    font-family: ProximaNova;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    right: 0px;
+    position: absolute;
+    top: 28px;
+    min-width: 88px;
+    padding: 0px 10px;
+
+    &:hover {
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+
+    &:active {
+        background-color: rgba(254, 44, 85, 0.16);
+    }
+}
+
+.btn-follow-video-popper {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    color: rgb(254, 44, 85);
+    border-color: rgb(254, 44, 85);
+    background-color: rgb(255, 255, 255);
+    min-width: 106px;
+    min-height: 28px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    font-family: ProximaNova;
+    display: flex;
+    position: relative;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 6px 8px;
+    user-select: none;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:hover {
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+
+    &:active {
+        background-color: rgba(254, 44, 85, 0.16);
+    }
+}
