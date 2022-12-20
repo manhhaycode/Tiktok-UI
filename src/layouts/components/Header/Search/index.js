@@ -70,27 +70,30 @@ function Search() {
                 setVisible(false);
                 setSearchResult('');
                 let res = await APIService.search(searchValue.trim(), 'less');
-                if (!onClickOutside.current) {
-                    if (!onChangeLocation.current) {
-                        setVisible(true);
+                setTimeout(() => {
+                    if (!onClickOutside.current) {
+                        if (!onChangeLocation.current) {
+                            setVisible(true);
+                        } else {
+                            onChangeLocation.current = false;
+                        }
                     } else {
-                        onChangeLocation.current = false;
+                        setVisible(false);
                     }
-                } else {
-                    setVisible(false);
-                }
-                setSearchResult(res);
-                setLoadAnimation(false);
-                setRequestSearch(false);
+                    setSearchResult(res);
+                    setLoadAnimation(false);
+                    setRequestSearch(false);
+                }, 500);
             }, 700);
         }
     }, [searchValue, requestSearch]);
 
     const handleclick = (e) => {
-        if (!inputRef.current.contains(e.target) && !visible) {
+        if (!inputRef.current.contains(e.target)) {
             if (onSelect.current === 0) {
                 onSelect.current = 1;
             } else {
+                console.log('onclick outside');
                 onClickOutside.current = true;
             }
         }

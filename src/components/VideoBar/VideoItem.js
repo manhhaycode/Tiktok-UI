@@ -19,7 +19,7 @@ function VideoItem({ data }) {
                 <Link to="/" className={cx('container-item--info')}>
                     <div className={cx('container-item--nickname')}>
                         {data.user.nickname}
-                        <CheckIcon />
+                        {data.user.tick && <CheckIcon />}
                     </div>
                     <div className={cx('container-item--bio')}>{data.user.bio}</div>
                 </Link>

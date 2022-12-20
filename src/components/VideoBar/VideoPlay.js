@@ -14,7 +14,7 @@ function VideoPlay({ data }) {
     const inputRef = useRef(null);
     const videoRef = useRef();
     let videoAspectRaito = useAspectRatioVideo(data.meta);
-    let isVisible = useElementOnScreen(ref, { threshold: [0.4, 0.8] }, 0.75);
+    let isVisible = useElementOnScreen(ref, { threshold: [0, 0.25, 0.5, 0.75, 1] }, 0.6);
     const [playingClick, setPlayingClick] = useState(true);
     const refLoading = useRef(null);
 
@@ -35,15 +35,7 @@ function VideoPlay({ data }) {
                     {isVisible && (
                         <div className={cx('video-play--container')}>
                             <video
-                                onLoadStart={() => {
-                                    if (refLoading.current) {
-                                        refLoading.current.className = cx('main-loading', 'onload');
-                                    }
-                                }}
                                 onLoadedData={() => {
-                                    setTimeout(() => {
-                                        if (refLoading.current) refLoading.current.className = cx('main-loading');
-                                    }, 700);
                                     if (videoRef.current) videoRef.current.className = cx('video-play', 'onload');
                                 }}
                                 ref={videoRef}
@@ -109,10 +101,6 @@ function VideoPlay({ data }) {
                                 >
                                     {state.volume === '0' ? <MutedIcon /> : <UnMutedIcon />}
                                 </div>
-                            </div>
-                            <div className={cx('main-loading')} ref={refLoading}>
-                                <div className={cx('circle', 'first')}></div>
-                                <div className={cx('circle', 'second')}></div>
                             </div>
                         </div>
                     )}

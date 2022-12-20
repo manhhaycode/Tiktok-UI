@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
 import images from '~/assets/image';
 
-function Image({ className, src, fallback = images.noImage, alt }, ref) {
+function Image({ className, src, fallback = images.tiktok, alt }, ref) {
     return (
         <img
+            style={{ backgroundColor: 'black' }}
             className={className}
             ref={ref}
             src={src || fallback}
