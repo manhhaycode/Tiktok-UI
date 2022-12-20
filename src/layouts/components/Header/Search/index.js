@@ -93,7 +93,6 @@ function Search() {
             if (onSelect.current === 0) {
                 onSelect.current = 1;
             } else {
-                console.log('onclick outside');
                 onClickOutside.current = true;
             }
         }

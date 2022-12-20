@@ -4,3 +4,10 @@ export const setVolume = (state) => {
         payload: state,
     };
 };
+
+export const setReload = (state) => {
+    return {
+        type: 'SET_RELOAD',
+        payload: state,
+    };
+};

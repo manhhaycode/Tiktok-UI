@@ -5,12 +5,14 @@ import styles from './Main.module.scss';
 import * as APIService from '~/services/APIService';
 import { useElementOnScreen } from '~/hooks';
 import Chance from 'chance';
+import { actions, useStore } from '~/store';
 
 const cx = classNames.bind(styles);
 
 function Main() {
     const [videoList, setVideoList] = useState([]);
     const endListRef = useRef(null);
+    const [state, dispatch] = useStore();
     const isLoading = useElementOnScreen(endListRef, { threshold: 0 }, 0);
 
     useEffect(() => {
@@ -22,6 +24,14 @@ function Main() {
             }
         }, 1000);
     }, [isLoading]);
+
+    useEffect(() => {
+        if (state.reload) {
+            setVideoList([]);
+            dispatch(actions.setReload(false));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.reload]);
 
     return (
         <div className={cx('DivMainContainer')}>

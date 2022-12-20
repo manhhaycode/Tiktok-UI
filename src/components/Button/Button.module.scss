@@ -35,6 +35,10 @@
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
     }
 
+    &:active {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), #fe2c55;
+    }
+
     background-color: rgb(254, 44, 85);
     padding: 6px 8px;
     line-height: 22px;
@@ -125,6 +129,14 @@
     user-select: none;
     cursor: pointer;
     box-sizing: border-box;
+
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+    }
+
+    &:active {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), rgb(254, 44, 85);
+    }
 }
 
 .btn-follow-video {
