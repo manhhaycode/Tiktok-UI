@@ -142,6 +142,7 @@
         width: 100%;
         background-color: black;
         object-fit: cover;
+        opacity: 0;
     }
 
     .canvas {
@@ -280,4 +281,66 @@
         transform: translate(100%, -50%);
         width: 12px;
     }
+}
+
+.main-loading {
+    margin: 8px auto;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    opacity: 0;
+
+    .circle {
+        width: 20px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0;
+        position: relative;
+    }
+
+    .first {
+        background: #fe2c55;
+        -webkit-animation: clockwise 1200ms infinite linear;
+        animation: clockwise 1200ms infinite linear;
+    }
+
+    .second {
+        mix-blend-mode: darken;
+        background: #25f4ee;
+        margin-left: -5px;
+        -webkit-animation: counter-clockwise 1200ms infinite linear;
+        animation: counter-clockwise 1200ms infinite linear;
+    }
+
+    @keyframes clockwise {
+        0% {
+            transform: translateX(0);
+            width: 20px;
+        }
+        25% {
+            width: 25px;
+        }
+        50% {
+            transform: translateX(100%);
+            width: 20px;
+        }
+    }
+
+    @keyframes counter-clockwise {
+        0% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(-100%);
+        }
+    }
+}
+
+.onload {
+    opacity: 1 !important;
 }

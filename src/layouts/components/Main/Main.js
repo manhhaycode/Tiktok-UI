@@ -16,7 +16,8 @@ function Main() {
     useEffect(() => {
         setTimeout(async () => {
             if (isLoading) {
-                const res = await APIService.videoList('for-you', Chance().integer({ min: 0, max: 20 }));
+                var rand = Chance().integer({ min: 0, max: 16 });
+                const res = await APIService.videoList('for-you', rand);
                 setVideoList((prev) => [...prev, res]);
             }
         }, 1000);

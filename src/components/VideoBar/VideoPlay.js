@@ -16,6 +16,7 @@ function VideoPlay({ data }) {
     let videoAspectRaito = useAspectRatioVideo(data.meta);
     let isVisible = useElementOnScreen(ref, { threshold: [0.4, 0.8] }, 0.75);
     const [playingClick, setPlayingClick] = useState(true);
+    const refLoading = useRef(null);
 
     useEffect(() => {
         if (isVisible) {
@@ -34,6 +35,17 @@ function VideoPlay({ data }) {
                     {isVisible && (
                         <div className={cx('video-play--container')}>
                             <video
+                                onLoadStart={() => {
+                                    if (refLoading.current) {
+                                        refLoading.current.className = cx('main-loading', 'onload');
+                                    }
+                                }}
+                                onLoadedData={() => {
+                                    setTimeout(() => {
+                                        if (refLoading.current) refLoading.current.className = cx('main-loading');
+                                    }, 700);
+                                    if (videoRef.current) videoRef.current.className = cx('video-play', 'onload');
+                                }}
                                 ref={videoRef}
                                 onClick={(e) => {}}
                                 className={cx('video-play')}
@@ -97,6 +109,10 @@ function VideoPlay({ data }) {
                                 >
                                     {state.volume === '0' ? <MutedIcon /> : <UnMutedIcon />}
                                 </div>
+                            </div>
+                            <div className={cx('main-loading')} ref={refLoading}>
+                                <div className={cx('circle', 'first')}></div>
+                                <div className={cx('circle', 'second')}></div>
                             </div>
                         </div>
                     )}
