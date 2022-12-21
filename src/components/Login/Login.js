@@ -15,23 +15,45 @@ import {
     UserIcon,
 } from '../Icon';
 import styles from './Login.module.scss';
+import { useSpring, motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    //eslint-disable-next-line
     const [state, dispatch] = useStore();
+
+    const springConfig = { damping: 30, stiffness: 100000 };
+    const initialScale = 0.2;
+    const opacity = useSpring(0, springConfig);
+    const scale = useSpring(initialScale, springConfig);
+
+    const handleLoadStart = () => {
+        console.log('a');
+        scale.set(1);
+        opacity.set(1);
+    };
+
+    const handleClose = () => {
+        scale.set(initialScale);
+        opacity.set(0);
+        setTimeout(() => {
+            dispatch(actions.setModalLogin(false));
+        }, 300);
+    };
+
+    useEffect(() => {
+        handleLoadStart();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('modal-mask')}></div>
-            <div className={cx('login-modal-container')}>
+            <motion.div className={cx('login-modal-container')} style={{ opacity, scale }}>
                 <div className={cx('login-modal')}>
-                    <div
-                        className={cx('close-modal--wrapper')}
-                        onClick={() => {
-                            dispatch(actions.setModalLogin(false));
-                        }}
-                    >
+                    <div className={cx('close-modal--wrapper')} onClick={handleClose}>
                         <CloseIcon />
                     </div>
                     <div className={cx('login-modal--page__wrapper')}>
@@ -83,7 +105,7 @@ function Login() {
                         </Link>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }
