@@ -1,6 +1,7 @@
 export const initState = {
     volume: '0',
     reload: false,
+    theme: 'white',
 };
 
 const reducer = (state, action) => {
@@ -14,6 +15,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 reload: action.payload,
+            };
+        case 'SET_THEME':
+            return {
+                ...state,
+                theme: action.payload,
             };
         default:
             return state;

@@ -51,6 +51,7 @@ function Menu({ children, items = [] }, onChange = () => {}) {
                         }
                     }}
                     isChildren={children}
+                    toogle={item.toogle}
                 >
                     {item.title}
                 </MenuItem>

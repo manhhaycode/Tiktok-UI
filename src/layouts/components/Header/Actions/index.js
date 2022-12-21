@@ -19,6 +19,7 @@ import {
 } from '~/components/Icon';
 import { Fragment } from 'react';
 import { Menu } from '~/components/Popper/Menu';
+import ToogleTheme from '~/components/ToogleTheme/ToogleTheme';
 
 const cx = classNames.bind(styles);
 
@@ -53,6 +54,7 @@ const MENU_ITEMS = [
     },
     {
         icon: <DarkModeIcon />,
+        toogle: <ToogleTheme />,
         title: 'Dark Mode',
     },
 ];

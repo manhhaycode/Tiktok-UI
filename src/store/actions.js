@@ -11,3 +11,10 @@ export const setReload = (state) => {
         payload: state,
     };
 };
+
+export const setTheme = (state) => {
+    return {
+        type: 'SET_THEME',
+        payload: state,
+    };
+};
