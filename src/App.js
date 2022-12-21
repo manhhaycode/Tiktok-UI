@@ -53,7 +53,9 @@ function App() {
                                             </Layout>
                                         </BrowserView>
                                         <MobileView>
-                                            <h1>This site only work in desktop or laptop not mobile</h1>
+                                            <h1 style={{ textAlign: 'center' }}>
+                                                This site only work in desktop or laptop not mobile
+                                            </h1>
                                         </MobileView>
                                     </Fragment>
                                 }
