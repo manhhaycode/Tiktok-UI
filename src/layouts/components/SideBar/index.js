@@ -15,11 +15,16 @@ import { AccountItem, SuggestedAccounts } from './SuggestedAccounts';
 import { useEffect, useState } from 'react';
 import { Discover } from './Discover';
 import { LinkList } from './LinkList';
+import { actions, useStore } from '~/store';
 
 const cx = classNames.bind(styles);
 
 function SideBar() {
-    const handleOnlick = () => {};
+    // eslint-disable-next-line
+    const [state, dispatch] = useStore();
+    const handleOnlick = () => {
+        dispatch(actions.setModalLogin(true));
+    };
     const [suggestedAccounts, setSuggestedAccounts] = useState([]);
     useEffect(() => {
         setTimeout(async () => {
