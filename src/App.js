@@ -4,7 +4,7 @@ import { publicRoutes } from '~/routes';
 import { DeafaultLayout } from '~/layouts';
 import { useStore } from './store';
 import { Login } from './components/Login';
-
+import { BrowserView, MobileView } from 'react-device-detect';
 function App() {
     // eslint-disable-next-line
     const [state, dispatch] = useStore();
@@ -45,10 +45,17 @@ function App() {
                                 key={index}
                                 path={route.path}
                                 element={
-                                    <Layout>
-                                        <Page />
-                                        {state.modalLogin && <Login />}
-                                    </Layout>
+                                    <Fragment>
+                                        <BrowserView>
+                                            <Layout>
+                                                <Page />
+                                                {state.modalLogin && <Login />}
+                                            </Layout>
+                                        </BrowserView>
+                                        <MobileView>
+                                            <h1>This site only work in desktop or laptop not mobile</h1>
+                                        </MobileView>
+                                    </Fragment>
                                 }
                             ></Route>
                         );

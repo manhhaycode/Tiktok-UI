@@ -30,7 +30,6 @@ function Login() {
     const scale = useSpring(initialScale, springConfig);
 
     const handleLoadStart = () => {
-        console.log('a');
         scale.set(1);
         opacity.set(1);
     };
