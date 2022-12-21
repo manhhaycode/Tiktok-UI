@@ -2,6 +2,7 @@ export const initState = {
     volume: '0',
     reload: false,
     theme: 'white',
+    modalLogin: false,
 };
 
 const reducer = (state, action) => {
@@ -20,6 +21,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 theme: action.payload,
+            };
+        case 'SET_MODAL-LOGIN':
+            return {
+                ...state,
+                modalLogin: action.payload,
             };
         default:
             return state;

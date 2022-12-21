@@ -18,3 +18,10 @@ export const setTheme = (state) => {
         payload: state,
     };
 };
+
+export const setModalLogin = (state) => {
+    return {
+        type: 'SET_MODAL-LOGIN',
+        payload: state,
+    };
+};

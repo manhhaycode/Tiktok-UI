@@ -20,6 +20,7 @@ import {
 import { Fragment } from 'react';
 import { Menu } from '~/components/Popper/Menu';
 import ToogleTheme from '~/components/ToogleTheme/ToogleTheme';
+import { actions, useStore } from '~/store';
 
 const cx = classNames.bind(styles);
 
@@ -82,6 +83,9 @@ function Actions() {
         ...MENU_ITEMS,
     ];
 
+    // eslint-disable-next-line
+    const [state, dispatch] = useStore();
+
     return (
         <div className={cx('right__container')}>
             {userCurrent ? (
@@ -103,7 +107,14 @@ function Actions() {
                         <PlusIcon />
                         <p className={cx('btn__upload--text')}>Upload</p>
                     </Button>
-                    <Button className="btn__login">Log in</Button>
+                    <Button
+                        className="btn__login"
+                        onClick={() => {
+                            dispatch(actions.setModalLogin(true));
+                        }}
+                    >
+                        Log in
+                    </Button>
                 </Fragment>
             )}
 

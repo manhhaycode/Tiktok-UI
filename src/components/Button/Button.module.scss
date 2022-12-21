@@ -211,3 +211,22 @@
         background-color: rgba(254, 44, 85, 0.16);
     }
 }
+
+.btn-login--platform {
+    color: rgb(22, 24, 35);
+    font-family: ProximaNova;
+    font-weight: 600;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    font-size: 15px;
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    background: rgb(255, 255, 255);
+    width: 100%;
+    position: relative;
+    margin-left: 0 !important;
+}
