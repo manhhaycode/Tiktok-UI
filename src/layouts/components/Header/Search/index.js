@@ -20,7 +20,6 @@ function Search() {
     let location = useLocation();
     const myTimeout = useRef();
     const onClickOutside = useRef(false);
-    const onChangeLocation = useRef(false);
     const onSelect = useRef(-1);
     const inputRef = useRef(null);
 
@@ -72,11 +71,7 @@ function Search() {
                 let res = await APIService.search(searchValue.trim(), 'less');
                 setTimeout(() => {
                     if (!onClickOutside.current) {
-                        if (!onChangeLocation.current) {
-                            setVisible(true);
-                        } else {
-                            onChangeLocation.current = false;
-                        }
+                        setVisible(true);
                     } else {
                         setVisible(false);
                     }
@@ -108,6 +103,7 @@ function Search() {
                 if (searchResult) {
                     setVisible(true);
                 }
+                console.log(e.target.value);
                 setRequestSearch(true);
             }
         } else {
@@ -131,13 +127,14 @@ function Search() {
 
     const handleOnClickRemove = () => {
         setSearchValue('');
-        onChangeLocation.current = false;
         setRequestSearch(false);
     };
 
     return (
         <div className={cx('search-bar__container')}>
             <form className={cx('search-bar__form')}>
+                {console.log(searchResult)}
+                {console.log(visible + ' ' + onClickOutside.current)}
                 <HeadlessTippy
                     interactive
                     render={(attrs) => (
@@ -155,8 +152,7 @@ function Search() {
                                                 key={item.id}
                                                 data={item}
                                                 onClick={() => {
-                                                    onChangeLocation.current = true;
-                                                    setSearchValue(item.full_name);
+                                                    setSearchValue(item.nickname);
                                                     setRequestSearch(true);
                                                 }}
                                             />

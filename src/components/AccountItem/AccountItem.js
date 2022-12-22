@@ -8,14 +8,14 @@ const cx = classNames.bind(styles);
 
 function AccountItem({ data, onClick = () => {} }) {
     return (
-        <Link to="/@adinhsg" className={cx('wrapper')} onClick={onClick}>
+        <Link to={`/@${data.nickname}`} className={cx('wrapper')} onClick={onClick}>
             <Image className={cx('avatar')} src={data.avatar}></Image>
             <div className={cx('user-info--container')}>
-                <div className={cx('user-name')}>
-                    {data.full_name}
+                <div className={cx('user-nick-name')}>
+                    {data.nickname}
                     {data.tick && <CheckIcon />}
                 </div>
-                <div className={cx('user-nick-name')}>{data.nickname}</div>
+                <div className={cx('user-name')}>{data.full_name}</div>
             </div>
         </Link>
     );

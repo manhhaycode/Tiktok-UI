@@ -4,7 +4,7 @@ const routes = {
     profile: '/profile',
     upload: '/upload',
     search: '/search',
-    userProfile: '/@adinhsg',
+    userProfile: '/@:userId',
     live: '/live',
 };
 
