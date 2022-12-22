@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDescription } from '~/hooks';
+import { actions, useStore } from '~/store';
 import Button from '../Button/Button';
 import { CheckIcon, MusicIcon } from '../Icon';
 import { Image } from '../Image';
@@ -13,6 +14,8 @@ const cx = classNames.bind(styles);
 
 function VideoItem({ data }) {
     let description = useDescription(data.description);
+    // eslint-disable-next-line
+    const [state, dispatch] = useStore();
 
     return (
         <div className={cx('container-item')}>
@@ -68,7 +71,14 @@ function VideoItem({ data }) {
                         </Link>
                     </div>
                 </div>
-                <Button className="btn-follow-video">Follow</Button>
+                <Button
+                    className="btn-follow-video"
+                    onClick={() => {
+                        dispatch(actions.setModalLogin(true));
+                    }}
+                >
+                    Follow
+                </Button>
                 <VideoPlay data={data} />
             </div>
         </div>

@@ -1,11 +1,14 @@
 import classNames from 'classnames/bind';
-import Button from '../Button/Button';
+import { actions, useStore } from '~/store';
 import { CommentIcon, HeartIcon, ShareIcon } from '../Icon';
 import styles from './VideoBar.module.scss';
 
 const cx = classNames.bind(styles);
 
 function VideoAction({ data }) {
+    // eslint-disable-next-line
+    const [state, dispatch] = useStore();
+
     return (
         <div className={cx('video-action--wrapper')}>
             <button className={cx('video-action-btn')}>
@@ -14,13 +17,23 @@ function VideoAction({ data }) {
                 </i>
                 <strong className={cx('video-action-count')}>{data.shares_count}</strong>
             </button>
-            <button className={cx('video-action-btn')}>
+            <button
+                className={cx('video-action-btn')}
+                onClick={() => {
+                    dispatch(actions.setModalLogin(true));
+                }}
+            >
                 <i className={cx('video-action-icon')}>
                     <CommentIcon />
                 </i>
                 <strong className={cx('video-action-count')}>{data.comments_count}</strong>
             </button>
-            <button className={cx('video-action-btn')}>
+            <button
+                className={cx('video-action-btn')}
+                onClick={() => {
+                    dispatch(actions.setModalLogin(true));
+                }}
+            >
                 <i className={cx('video-action-icon')}>
                     <HeartIcon />
                 </i>

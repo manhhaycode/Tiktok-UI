@@ -103,7 +103,6 @@ function Search() {
                 if (searchResult) {
                     setVisible(true);
                 }
-                console.log(e.target.value);
                 setRequestSearch(true);
             }
         } else {
@@ -133,8 +132,6 @@ function Search() {
     return (
         <div className={cx('search-bar__container')}>
             <form className={cx('search-bar__form')}>
-                {console.log(searchResult)}
-                {console.log(visible + ' ' + onClickOutside.current)}
                 <HeadlessTippy
                     interactive
                     render={(attrs) => (
